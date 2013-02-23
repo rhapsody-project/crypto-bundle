@@ -38,7 +38,6 @@ class SecureHashProviderTest extends \PHPUnit_Framework_TestCase
 
 	public function testGenerateRandomSalt() {
 		$salt = self::$secureHashProvider->generateRandomSalt();
-		var_dump($salt);
 		$this->assertEquals(SecureHash::SALT_SIZE_BITS, strlen($salt));
 	}
 
