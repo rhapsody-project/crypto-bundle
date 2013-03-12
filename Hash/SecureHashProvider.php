@@ -3,7 +3,6 @@ namespace Rhapsody\CryptoBundle\Hash;
 
 use \Rhapsody\CryptoBundle\Provider\ICryptoProvider;
 use \Rhapsody\CryptoBundle\Hash\SecureHash;
-use \Commons\Lang\Exception\IllegalArgumentException;
 
 /**
  *
@@ -102,7 +101,7 @@ final class SecureHashProvider implements ICryptoProvider
 	 */
 	public function generateRandomSalt() {
 		if (@function_exists('openssl_random_pseudo_bytes')) {
-			$salt = openssl_random_pseudo_bytes(SecureHash::SALT_SIZE_BYTES, $strong);
+			$salt = openssl_random_pseudo_bytes(SecureHash::SALT_SIZE_BYTES * 2, $strong);
 			if ($strong !== true) {
 				throw new \Exception('OpenSSL failed to generate a strong salt.');
 			}
@@ -153,12 +152,12 @@ final class SecureHashProvider implements ICryptoProvider
 
 		// ** Verify parameters are not null; if they are throw exception(s)...
 		if (empty($randomSalt) || empty($clearData)) {
-			throw new IllegalArgumentException("Object cannot be null.");
+			throw new \InvalidArgumentException("Object cannot be null.");
 		}
 
 		// ** Confirm the random salt's size.
 		if (strlen($randomSalt) != SecureHash::SALT_SIZE_BITS) {
-			throw new IllegalArgumentException('Invalid salt length: '
+			throw new \InvalidArgumentException('Invalid salt length: '
 					. strlen($randomSalt) . '; Expected number of bits: ' . SecureHash::SALT_SIZE_BITS);
 		}
 
