@@ -53,9 +53,16 @@ use \Commons\Lang\Exception\IllegalArgumentException;
  */
 final class SecureHash implements \Serializable
 {
+	// TODO: The current implementation of SecureHash does not support all possible algorithms; we have fixed sizes of salt and hash values that will depend on the algorithm used.
 
 	/**
-	 * Size of the buffer for salt values, in bits.
+	 * The size of a single character, in bits, within PHP.
+	 * @var int
+	 */
+	const /*int*/ CHAR_SIZE_BITS = 4;
+
+	/**
+	 * Size of the buffer for salt values, in bits. There are 8-bits to a byte.
 	 * @var int
 	 */
 	const /*int*/ SALT_SIZE_BITS = 16;
@@ -81,7 +88,7 @@ final class SecureHash implements \Serializable
 	/**
 	 * An 8-byte random salt value that will be used as part of the hashing
 	 * algorithm. The usage of a byte string in PHP takes the place of the
-	 * conventional <tt>byte[]</tt> in Java.
+	 * conventional <tt>byte[]</tt> in Java. There are 8-bits to a byte.
 	 * @var string
 	 * @access private
 	 */

@@ -33,8 +33,11 @@ final class SecureHashProvider implements ICryptoProvider
 	protected $applicationKey;
 
 	/**
-	 * The bundle encryption key.
-	 * @var unknown_type
+	 * The bundle encryption key. This is one of the three encryption keys that
+	 * gets used during the encryption of a secure hash value. Changing this
+	 * will result in the invalidation of all previously encrypted values.
+	 * @var string
+	 * @access protected
 	 */
 	protected $bundleKey;
 
@@ -110,6 +113,8 @@ final class SecureHashProvider implements ICryptoProvider
 
 		$salt = '';
 		$sha = '';
+
+		//$bitPairs = ...
 		for ($i = 0; $i < SecureHash::SALT_SIZE_BYTES; $i++) {
 			$sha = hash('sha256', $sha . mt_rand());
 			$char = mt_rand(0,62);
@@ -158,7 +163,7 @@ final class SecureHashProvider implements ICryptoProvider
 		// ** Confirm the random salt's size.
 		if (strlen($randomSalt) != SecureHash::SALT_SIZE_BITS) {
 			throw new \InvalidArgumentException('Invalid salt length: '
-					. strlen($randomSalt) . '; Expected number of bits: ' . SecureHash::SALT_SIZE_BITS);
+					. strlen($randomSalt) . '; Salt length is too short: Expected number of bits: ' . SecureHash::SALT_SIZE_BITS);
 		}
 
 		// Algorithm adapted from http://www.owasp.org/index.php/Hashing_Java
