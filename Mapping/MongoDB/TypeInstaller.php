@@ -2,7 +2,7 @@
 namespace Rhapsody\CryptoBundle\Mapping\MongoDB;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Doctrine\ODM\MongoDB\Mapping\Types\Type as MongoDBType;
+use Doctrine\ODM\MongoDB\Types\Type as MongoDBType;
 use Rhapsody\CryptoBundle\Mapping\ITypeInstaller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

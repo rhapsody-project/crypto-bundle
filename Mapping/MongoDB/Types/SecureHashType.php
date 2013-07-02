@@ -2,7 +2,7 @@
 namespace Rhapsody\CryptoBundle\Mapping\MongoDB\Types;
 
 use Rhapsody\CryptoBundle\Hash\SecureHash;
-use Doctrine\ODM\MongoDB\Mapping\Types\Type;
+use Doctrine\ODM\MongoDB\Types\Type;
 
 /**
  * <p>
@@ -19,7 +19,7 @@ class SecureHashType extends Type
 
 	/**
 	 * {@inheritDoc}
-	 * @see Doctrine\ODM\MongoDB\Mapping\Types\Type::closureToPHP()
+	 * @see Doctrine\ODM\MongoDB\Types\Type::closureToPHP()
 	 */
 	public function closureToPHP() {
 		return '$return = $value === null ? null : \Rhapsody\CryptoBundle\Hash\SecureHash::fromBase64($value);';
@@ -27,7 +27,7 @@ class SecureHashType extends Type
 
 	/**
 	 * {@inheritDoc}
-	 * @see Doctrine\ODM\MongoDB\Mapping\Types\Type::convertToPHPValue()
+	 * @see Doctrine\ODM\MongoDB\Types\Type::convertToPHPValue()
 	 */
 	public function convertToPHPValue($value) {
 		return $value == null ? null : SecureHash::fromBase64($value);
@@ -35,7 +35,7 @@ class SecureHashType extends Type
 
 	/**
 	 * {@inheritDoc}
-	 * @see Doctrine\ODM\MongoDB\Mapping\Types\Type::convertToDatabaseValue()
+	 * @see Doctrine\ODM\MongoDB\Types\Type::convertToDatabaseValue()
 	 */
 	public function convertToDatabaseValue($value)
 	{
