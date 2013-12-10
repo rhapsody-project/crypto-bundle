@@ -6,17 +6,22 @@
 
     <parameters>
         <parameter key="rhapsody.crypto.strategy.secureHash.class">Rhapsody\CryptoBundle\SecureHashEncryptor</parameter>
+        <parameter key="rhapsody.crypto.hash.context.secure_hash.class">Rhapsody\CryptoBundle\Hash\SecureHashProvider</parameter>
         <parameter key="rhapsody.crypto.hash.provider.secure_hash.class">Rhapsody\CryptoBundle\Hash\SecureHashProvider</parameter>
         <parameter key="rhapsody.crypto.hash.encoder.secure_hash.class">Rhapsody\CryptoBundle\Hash\SecureHashEncoder</parameter>
     </parameters>
 
     <services>
+        <service id="rhapsody.crypto.hash.context.secure_hash" class="%rhapsody.crypto.hash.context.secure_hash.class%">
+            <argument type="service" id="rhapsody.crypto.hash.provider.secure_hash" />
+        </service>
+
         <!--
             SecureHashProvider:
                 The SecureHashProvider is an all encompassing class for working
                 with SecureHash objects.
         -->
-        <service id="rhapsody.crypto.hash.provider.secure_hash" class="%rhapsody.crypto.hash.provider.secure_hash.class%" public="false">
+        <service id="rhapsody.crypto.hash.provider.secure_hash" class="%rhapsody.crypto.hash.provider.secure_hash.class%">
             <argument>%rhapsody.crypto.secure_hash.algorithm%</argument>
             <argument>%rhapsody.crypto.secure_hash.application_key%</argument>
             <argument>%rhapsody.crypto.secure_hash.bundle_key%</argument>
