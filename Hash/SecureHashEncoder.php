@@ -49,7 +49,7 @@ class SecureHashEncoder implements PasswordEncoderInterface
 	 */
 	public function encodePassword($raw, $salt) {
 		if ($this->cryptoProvider === null) {
-			throw new \Exception('NullPointerException');
+			throw new \NullPointerException('Cryptography provider cannot be null.');
 		}
 		return $this->cryptoProvider->encrypt($raw, $salt);
 	}
@@ -59,9 +59,12 @@ class SecureHashEncoder implements PasswordEncoderInterface
 	 * @see Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface::isPasswordValid()
 	 */
 	public function isPasswordValid(/*SecureHash*/ $encoded, /*string*/ $raw, $salt) {
-		if ($this->cryptoProvider === null) {
-			throw new \Exception('NullPointerException');
+		if (!empty($raw)) {
+			if ($this->cryptoProvider === null) {
+				throw new \NullPointerException('Cryptography provider cannot be null.');
+			}
+			return $this->cryptoProvider->check($raw, $encoded);
 		}
-		return $this->cryptoProvider->check($raw, $encoded);
+		return false;
 	}
 }
