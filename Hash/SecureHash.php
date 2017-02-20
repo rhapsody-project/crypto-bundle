@@ -1,5 +1,5 @@
 <?php
-/* Copyright (c) 2013 Rhapsody Project
+/* Copyright (c) Rhapsody Project
  *
  * Licensed under the MIT License (http://opensource.org/licenses/MIT)
  *
@@ -27,7 +27,7 @@
  */
 namespace Rhapsody\CryptoBundle\Hash;
 
-use \Commons\Lang\Exception\IllegalArgumentException;
+use \Commons\Exception\IllegalArgumentException;
 
 /**
  * <p>
