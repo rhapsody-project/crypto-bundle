@@ -27,7 +27,7 @@
  */
 namespace Rhapsody\CryptoBundle\Hash;
 
-use \Commons\Exception\IllegalArgumentException;
+use Rhapsody\Commons\Exception\IllegalArgumentException;
 
 /**
  * <p>
